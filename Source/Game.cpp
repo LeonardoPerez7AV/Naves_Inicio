@@ -3,7 +3,7 @@
 #include "Game.h"
 
 CGame::CGame(){
-	   int estado = 0;///ACT2: Esto esta MAL
+	   int estado = 0;///ACT2: Mal, Falto esto de corregir, aqui va tu estado inicial, cual estado quieres que se ejecute primero.
 }
 
 // Con esta función eliminaremos todos los elementos en pantalla
