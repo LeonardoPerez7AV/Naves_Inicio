@@ -1,14 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 #include "Game.h"
-#include <SDL.H>
-#include <SDL_Image.h>
-
+//#include <SDL.h>
+//#include <SDL_image.h>
 
 CGame::CGame(){
-	   int estado = ESTADO_INICIANDO;///ACT2: Mal, Falto esto de corregir, aqui va tu estado inicial, cual estado quieres que se ejecute primero.
-	   SDL_Surface *screen;
-	   if (SDL_Init(SDL_INIT_VIDEO)){
+	   estado = ESTADO_INICIANDO;///ACT2: Mal, Falto esto de corregir, aqui va tu estado inicial, cual estado quieres que se ejecute primero.
+	   //SDL_Surface *screen;
+	   if (SDL_Init(SDL_INIT_VIDEO)<0){
 		   printf("Error: %s",SDL_GetError());
 		   exit(EXIT_FAILURE);
 	   }
@@ -39,6 +38,32 @@ bool CGame::Start()
 		//Maquina de estados
 		switch(estado){
 		case Estado::ESTADO_INICIANDO:    //INICIALIZAR
+			Iniciando();
+			{
+				//nave = SDL_LoadBMP("../Data/MiNave.bmp");//los dos puntos significa una carpeta anterior como en cmd
+				                                         //propiedades de salida-directorio de salida/las imagenes se encuantran en la carpeta data
+			   // nave = IMG_LoadJPG_RW(SDL_RWFromFile("../Data/umi.jpg","rb"));
+				// nave = IMG_LoadJPG_RW(SDL_RWFromFile("../Data/umi.jpg","rb"));
+				//  nave = IMG_LoadPNG_RW(SDL_RWFromFile("../Data/umi.png","rb"));
+				//   nave = IMG_LoadJPG_RW(SDL_RWFromFile("../Data/umi.jpg","rb"));
+				   SDL_Rect fuente;
+				   fuente.x = 90;
+				   fuente.y = 152;
+				   fuente.w = 242;
+				   fuente.h = 73;
+					   SDL_Rect destino;
+				   destino.x = 100;
+				   destino.y = 100;
+				   destino.w = 100;
+				   destino.h = 100;
+				   SDL_BlitSurface(nave, &fuente, screen, &destino);
+
+				SDL_BlitSurface(nave,NULL,screen,NULL);
+				              //fuente   // destino
+				SDL_FreeSurface(nave);
+			}
+			estado = Estado::ESTADO_MENU;
+
 			break;
 		case Estado::ESTADO_MENU:	      //MENU	
 			break;
@@ -51,7 +76,7 @@ bool CGame::Start()
 			break;
 		};
 		
-		SDL_Flip(screen);
+		SDL_Flip(screen);//todo lo que llega aqui lo imprime
     }
 	return true;
 }
