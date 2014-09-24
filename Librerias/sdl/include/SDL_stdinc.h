@@ -95,7 +95,7 @@ typedef enum {
 	SDL_TRUE  = 1
 } SDL_bool;
 
-typedef int8_t		Sint8;
+typedef int8_t		Sint8;  //esta rara el tipo de variable**********************
 typedef uint8_t		Uint8;
 typedef int16_t		Sint16;
 typedef uint16_t	Uint16;
