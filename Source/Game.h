@@ -25,5 +25,5 @@ private:
 	SDL_Surface *nave;
 	Estado estado;
 
-}
+};
 #endif
