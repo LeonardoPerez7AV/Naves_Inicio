@@ -4,13 +4,14 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-CGame::CGame(){
-	   estado = ESTADO_INICIANDO;                        ///ACT2: Mal, Falto esto de corregir, aqui va tu estado inicial, cual estado quieres que se ejecute primero.
+CGame::CGame()
+{
+	   estado = ESTADO_INICIANDO; //aqui va el estado inicial, es el estado quieres que se ejecute primero.
 	   atexit(SDL_Quit);
 	     //int estado = 0;
 	   //SDL_Surface *screen;
 	 
-	   if (SDL_Init(SDL_INIT_VIDEO)<0)
+	   if (SDL_Init(SDL_INIT_VIDEO))
 	   {
 		   printf("Error: %s",SDL_GetError());
 		   exit(EXIT_FAILURE);
@@ -33,7 +34,9 @@ void CGame::Finalize()
 	SDL_Quit();
 	/*if (SDL_Init( SDL_INIT_VIDEO )){
 		printf("Error %s ", SDL_GetError());
-		exit(EXIT_FAILURE);		}		screen = SDL_SetVideoMode( 640, 480, 24, SDL_SWSURFACE );
+		exit(EXIT_FAILURE);
+		}
+		screen = SDL_SetVideoMode( 640, 480, 24, SDL_SWSURFACE );
 		if (screen == NULL)
 		{
 			printf("Error %s ", SDL_GetError());
@@ -49,15 +52,14 @@ void CGame::Finalize()
 bool CGame::Start()
 {
 	// Esta variable nos ayudara a controlar la salida del juego...
-	int salirJuego = false;
-	
-          
-	while (salirJuego == false){
+	int salirJuego = false;          
+	while (salirJuego == false)
+	{
             
 		//Maquina de estados
 		switch(estado)
-		{
-		case Estado::ESTADO_INICIANDO:    //INICIALIZAR
+	    {
+		    case Estado::ESTADO_INICIANDO:    //INICIALIZAR
 			//Iniciando();
 			{
 			    	nave = SDL_LoadBMP("../Data/MiNave.bmp");//los dos puntos significa una carpeta anterior como en cmd
@@ -66,7 +68,7 @@ bool CGame::Start()
 			   	// nave = IMG_LoadJPG_RW(SDL_RWFromFile("../Data/umi.jpg","rb"));
 				//  nave = IMG_LoadPNG_RW(SDL_RWFromFile("../Data/umi.png","rb"));
 				//  nave = IMG_LoadJPG_RW(SDL_RWFromFile("../Data/umi.jpg","rb"));
-				   SDL_Rect fuente;
+				      SDL_Rect fuente;
 				   fuente.x = 90;
 				   fuente.y = 152;
 				   fuente.w = 242;
