@@ -1,22 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Game.h"
+#include "Config.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
-CGame::CGame()
+CGame::CGame() //los cuatro puntos son definiciones estaticas de acceso de objetos METODO=Game() y CLASE=Game
 {
 	   estado = ESTADO_INICIANDO; //aqui va el estado inicial, es el estado quieres que se ejecute primero.
 	   atexit(SDL_Quit);
 	     //int estado = 0;
 	   //SDL_Surface *screen;
 	 
-	   if (SDL_Init(SDL_INIT_VIDEO))
+	   if (SDL_Init(SDL_INIT_VIDEO))//******cambio de video por audio
 	   {
 		   printf("Error: %s",SDL_GetError());
 		   exit(EXIT_FAILURE);
 	   }
-	   screen = SDL_SetVideoMode(640,480,24,SDL_SWSURFACE);
+	   screen = SDL_SetVideoMode( WIDTH_SCREEN, HEIGTH_SCREEN, 24,SDL_HWSURFACE);//es son los que van "640,480,24,SDL_SWSURFACE"
 	   if (screen == NULL)
 	   {
 		   printf("Error: %s",SDL_GetError());
