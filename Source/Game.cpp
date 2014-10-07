@@ -4,6 +4,7 @@
 #include "Config.h"
 #include <SDL.h>
 #include <SDL_image.h>
+#include "Sprite.h"
 
 CGame::CGame() //los cuatro puntos son definiciones estaticas de acceso de objetos METODO=Game() y CLASE=Game
 {
@@ -23,20 +24,24 @@ CGame::CGame() //los cuatro puntos son definiciones estaticas de acceso de objet
 		   printf("Error: %s",SDL_GetError());
 		   exit(EXIT_FAILURE);
 	   }
-	   SDL_Flip(screen);
+	   SDL_Flip(screen);//------------------------------------------------no esta en el codigo del profe
 	   SDL_WM_SetCaption("Mi primer Juego",NULL);
+	   nave = new Sprite(screen);                             //modifeque 
+	   nave->CargarImagen("../Data/MiNave.bmp");
 	 
-	  // atexit(SDL_Quit);
+	   atexit(SDL_Quit);
 }
 
 // Con esta función eliminaremos todos los elementos en pantalla
-void CGame::Finalize()
+void CGame::Finalize()  ///********esto no lo tiene el profe en su programa******************
 {
 	SDL_Quit();
-	/*if (SDL_Init( SDL_INIT_VIDEO )){
+	if (SDL_Init( SDL_INIT_VIDEO ))
+	{
 		printf("Error %s ", SDL_GetError());
 		exit(EXIT_FAILURE);
-		}
+	}
+		
 		screen = SDL_SetVideoMode( 640, 480, 24, SDL_SWSURFACE );
 		if (screen == NULL)
 		{
@@ -45,7 +50,7 @@ void CGame::Finalize()
 
 		}
 			SDL_WM_SetCaption( "Mi primer Juego", NULL );
-			SDL_Flip(screen);  */
+			SDL_Flip(screen);  
 
 }
 
@@ -61,9 +66,11 @@ bool CGame::Start()
 		switch(estado)
 	    {
 		    case Estado::ESTADO_INICIANDO:    //INICIALIZAR
-			//Iniciando();
-			{
-			    	nave = SDL_LoadBMP("../Data/MiNave.bmp");//los dos puntos significa una carpeta anterior como en cmd
+			Iniciando();  //crear el metodo , darle un cuerpo "actividad3"****************************
+			estado = ESTADO_MENU;
+			
+
+			    	/*nave = SDL_LoadBMP("../Data/MiNave.bmp");//los dos puntos significa una carpeta anterior como en cmd
 				                                         //propiedades de salida-directorio de salida/las imagenes se encuantran en la carpeta data
 			     // nave = IMG_LoadJPG_RW(SDL_RWFromFile("../Data/umi.jpg","rb"));
 			   	// nave = IMG_LoadJPG_RW(SDL_RWFromFile("../Data/umi.jpg","rb"));
@@ -84,9 +91,9 @@ bool CGame::Start()
 				   SDL_BlitSurface(nave,NULL,screen,NULL);
 				                   //fuente   // destino
      			   SDL_FreeSurface(nave);
-			}
-			//estado = Estado::ESTADO_MENU;
-
+			
+			
+			*/
 			//break;
 		case Estado::ESTADO_MENU:	      //MENU	
 			break;
