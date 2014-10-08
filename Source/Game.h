@@ -1,5 +1,3 @@
-//#ifndef __GAME_H__
-//#define __GAME_H__
 #include <SDL.h>
 #include <SDL_image.h>
 #include "Sprite.h"
@@ -11,21 +9,18 @@ public:
 	static CGame instanceGame;
 
 	CGame();
-	void Finalize();
-
+	void Finalize();  //ACT2: Mal, Aqui dejaste un error, tu codigo debe ser compilable correctamente.
 	enum Estado{
-         ESTADO_INICIANDO,
-         ESTADO_MENU,
-         ESTADO_JUGANDO,
-         ESTADO_TERMINANDO,
-         ESTADO_FINALIZANDO
-   };
+		ESTADO_INICIANDO,
+		ESTADO_MENU,
+		ESTADO_JUGANDO,
+		ESTADO_TERMINADO,
+		ESTADO_FINALIZADO,
+		};
 
 private:
 	void Iniciando();
-	SDL_Surface * screen;
-	Sprite *nave;    //SDL_Surface * nave;
+	SDL_Surface *screen;
+	Sprite *nave;
 	Estado estado;
-
 };
-//#endif
