@@ -24,8 +24,10 @@ CGame::CGame() //los cuatro puntos son definiciones estaticas de acceso de objet
 	}
 	SDL_Flip (screen); // este codigo estara provicionalmente aqui.
 	SDL_WM_SetCaption( "Mi Primer Juego", NULL);
+	atexit(SDL_Quit); //14-10-2014 12:00 hr
 	nave= new Sprite(screen);
 	nave->CargarImagen("../Data/MiNave.bmp");
+
 }
 
 // Con esta función eliminaremos todos los elementos en pantalla
@@ -45,9 +47,9 @@ bool CGame::Start()
 		switch(estado)
 		{
 			case Estado::ESTADO_INICIANDO: //INICIALIZAR
-				switch(estado)
+			/*	switch(estado)
 				{
-			/*	nave = SDL_LoadBMP("../Data/MiNave.bmp");
+				nave = SDL_LoadBMP("../Data/MiNave.bmp");
 				SDL_Rect Fuente;
 				Fuente.x =90;
 				Fuente.y =152;
@@ -64,9 +66,11 @@ bool CGame::Start()
 */
 				
 			case Estado::ESTADO_MENU:	//MENU
-                         Iniciando();
-                          estado=ESTADO_MENU;
-	        break;
+                        // Iniciando();
+                        //  estado=ESTADO_MENU;
+				//nave->PintarModulo(0,0,0,64,64); //esas son coordenas de la imagen que se esta leyendo
+	        	       nave->PintarModulo(SPRITE_MODULE_MI_NAVE,100,100);  // 290,175-Pantalla de  "640 X 480" despues de estos se sale.Fig = 65 X 65~
+			break;
 			case Estado::ESTADO_JUGANDO:	//JUGAR	
 			break;
 			case Estado::ESTADO_TERMINADO:	//TERMINAR
@@ -78,5 +82,4 @@ bool CGame::Start()
 		SDL_Flip(screen); //imprime en pantalla variable screen
     }
 	return true;
-}
 }
