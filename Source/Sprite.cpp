@@ -36,3 +36,12 @@ void Sprite::PintarModulo(int id, int x, int y)
 	dest.y = y;
 	SDL_BlitSurface(image, &src, screen, &dest);
 }
+
+int Sprite::WidthModule(int id)
+{
+	return spriteDef.modulos[id].w;
+}
+	int Sprite::HeightModule(int id)
+	{
+		return spriteDef.modulos[id].h;
+	}

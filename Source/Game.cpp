@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Game.h"
-#include "C:\Users\leonardo\Documents\Naves_Inicio\Proyecto\Config.h"
+#include "Config.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
@@ -25,8 +25,8 @@ CGame::CGame() //los cuatro puntos son definiciones estaticas de acceso de objet
 	SDL_Flip (screen); // este codigo estara provicionalmente aqui.
 	SDL_WM_SetCaption( "Mi Primer Juego", NULL);
 	atexit(SDL_Quit); //14-10-2014 12:00 hr
-	nave= new Sprite(screen);
-	nave->CargarImagen("../Data/MiNave.bmp");
+	nave= new Nave(screen,"../Data/MiNave.bmp");
+	//nave->CargarImagen("../Data/MiNave.bmp");
 
 }
 
@@ -63,13 +63,27 @@ bool CGame::Start()
 				SDL_BlitSurface(nave, &Fuente, screen, &destino);
 				SDL_BlitSurface(nave, NULL, screen, NULL);
 				SDL_FreeSurface(nave);
+ **archibos:	SDL_SURFACE = creamos la imagen
+				SPRITE = pintamos la imagen
+				NVE = le damos movimiento
 */
 				
 			case Estado::ESTADO_MENU:	//MENU
-                        // Iniciando();
-                        //  estado=ESTADO_MENU;
+				     SDL_FillRect(screen, NULL, 0x000000); //(pantalla,toda,color) color en "hexadecimal"
+					 // Para pintar toda la pantalla y quede negra "SDL_FillRect(screen, NULL, 0x000000)";
+                     keys = SDL_GetKeyState(NULL);
+					 if(keys[SDLK_DOWN])
+					 {
+						 nave->Mover(1);				
+					 }					
+					 nave->Pintar();//4if con todo
+					
+					  /*Otra Imagen   
+					 if(keys[SDLK_UP])
+					 {
 				//nave->PintarModulo(0,0,0,64,64); //esas son coordenas de la imagen que se esta leyendo
-	        	       nave->PintarModulo(SPRITE_MODULE_MI_NAVE,100,100);  // 290,175-Pantalla de  "640 X 480" despues de estos se sale.Fig = 65 X 65~
+	        	       nave->PintarModulo(SPRITE_MODULE_MI_NAVE,100,300);  // 290,175-Pantalla de  "640 X 480" despues de estos se sale.Fig = 65 X 65~
+					 }*/
 			break;
 			case Estado::ESTADO_JUGANDO:	//JUGAR	
 			break;
@@ -78,7 +92,13 @@ bool CGame::Start()
 			case Estado::ESTADO_FINALIZADO: //SALIR
 				salirJuego = true;
 			break;
-		};
+		};//------------Fin del switch
+
+		while (SDL_PollEvent(&event))
+		{
+			if(event.type == SDL_QUIT){salirJuego = true;}//Si se detecta una 
+			if(event.type == SDL_KEYDOWN){}
+		}
 		SDL_Flip(screen); //imprime en pantalla variable screen
     }
 	return true;
