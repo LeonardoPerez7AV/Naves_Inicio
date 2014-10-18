@@ -41,6 +41,7 @@ bool CGame::Start()
 {
 	// Esta variable nos ayudara a controlar la salida del juego...
 	int salirJuego = false;
+	int bandera = 0;
 
 	while (salirJuego == false)
 	{
@@ -104,7 +105,8 @@ bool CGame::Start()
 			nave->PintarModulo(SPRITE_MODULE_MI_NAVE,100,300);  // 290,175-Pantalla de  "640 X 480" despues de estos se sale.Fig = 65 X 65~
 			}*/
 			 printf("\n2. ESTADO_MENU");//EXAMEN1
-			estado = ESTADO_JUGANDO;
+			 if( bandera > 0){ estado = ESTADO_FINALIZADO;}//EXAMEN1
+			 else{estado = ESTADO_JUGANDO;}
 			break;
 		case Estado::ESTADO_JUGANDO:	//JUGAR	
 			 printf("\n3. ESTADO_JUGANDO");//EXAMEN1
@@ -112,10 +114,14 @@ bool CGame::Start()
 			break;
 		case Estado::ESTADO_TERMINADO:	//TERMINAR
 			 printf("\n4. ESTADO_TERMINADO");//EXAMEN1	
-   		 	 estado = ESTADO_FINALIZADO;
+   		 	 //estado = ESTADO_FINALIZADO;
+			 	 bandera=bandera+1;
+			 	 estado = ESTADO_MENU;//EXAMEN1
+			
 		  	break;
 		case Estado::ESTADO_FINALIZADO: //SALIR
-			 printf("\n2. ESTADO_MENU");//EXAMEN1
+			
+		//EXAMEN1	 printf("\n2. ESTADO_MENU");//EXAMEN1
 			 printf("\n5. ESTADO_FINALIZANDO");//EXAMEN1
 
 			getchar();
