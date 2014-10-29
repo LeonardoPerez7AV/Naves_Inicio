@@ -2,6 +2,8 @@
 #include <SDL_image.h>
 #include "Nave.h"
 
+
+
 class CGame
 {
 public:
@@ -20,11 +22,16 @@ public:
 
 private:
 	void Iniciando();
+	void MoverEnemigo();//Metodo para mover al enemigo
+	bool esLimitePantalla(Nave *objeto, int bandera);//metodo para limitar la pantalla
 
 	Uint8 *keys;//esta variable nos servira para ver las teclas
 	SDL_Event event;//La variable event de tipo evento de SDL nos sirve para
 
 	SDL_Surface *screen;
-	Nave *nave;
+	Nave *nave;      // La nave Nave y enemigo son las naves
+	Nave *enemigo;
 	Estado estado;
+
+	float ennemigoParabola;
 };

@@ -25,10 +25,13 @@ void CGame::Iniciando(){
 		printf("Error: %s",SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
-//EXAMEN1	SDL_Flip (screen); // este codigo estara provicionalmente aqui.
-//EXAMEN1	SDL_WM_SetCaption( "Mi Primer Juego", NULL);
-//EXAMEN1	atexit(SDL_Quit); //14-10-2014 12:00 hr
-//EXAMEN1	nave= new Nave(screen,"../Data/MiNave.bmp");
+	SDL_Flip (screen); // este codigo estara provicionalmente aqui.
+	SDL_WM_SetCaption( "Mi Primer Juego", NULL);
+	atexit(SDL_Quit); //14-10-2014 12:00 hr
+	nave= new Nave(screen,"../Data/MiNave.bmp",(WIDTH_SCREEN/2)/*-(w/2)*/,(HEIGHT_SCREEN-80)/*-(h)*/);
+	enemigo = new Nave(screen,"../Data/enemigo.bmp",0,0);
+	//ennemigoParabola = -100.0f;
+	enemigo->SetStep(4);
 	//nave->CargarImagen("../Data/MiNave.bmp");
 }
 
@@ -49,80 +52,48 @@ bool CGame::Start()
 		switch(estado)
 		{
 		case Estado::ESTADO_INICIANDO: //INICIALIZAR
-
-			/*	case Estado::ESTADO_MENU:				
-			    SDL_FillRect(screen, NULL, 000000);
-				keys = SDL_GetKeyState(NULL);
-				if (keys[SDLK_RIGHT]){
-					nave->Mover(10);}
-				nave->Pintar();	
-				estado = ESTADO_JUGANDO;
-			    break;
-		        case Estado::ESTADO_JUGANDO:
-			    printf("\n3. ESTADO_JUGANDO");
-			    estado = ESTADO_TERMINANDO;
-			    break;	
 			
-			switch(estado)
-			{
-			nave = SDL_LoadBMP("../Data/MiNave.bmp");
-			SDL_Rect Fuente;
-			Fuente.x =90;
-			Fuente.y =152;
-			Fuente.w =242;
-			Fuente.h =76;
-			SDL_Rect destino;
-			destino.x =100;
-			destino.y =100;
-			destino.w =100;
-			destino.h =100;
-			SDL_BlitSurface(nave, &Fuente, screen, &destino);
-			SDL_BlitSurface(nave, NULL, screen, NULL);
-			SDL_FreeSurface(nave);
-			**archibos:	SDL_SURFACE = creamos la imagen
-			SPRITE = pintamos la imagen	NVE = le damos movimiento
-			*/
-		
-	
-//EXAMEN1			Iniciando();//ACT3: Mal, falto llamar al metodo iniciando.
+			Iniciando();//ACT3: Mal, falto llamar al metodo iniciando.
 		    printf("\n1. ESTADO_INICIANDO");//EXAMEN1
 			estado = ESTADO_MENU;//ACT2: Mal falto llamar al siguiente estado
 			break;
 		case Estado::ESTADO_MENU:	//MENU
-/*EXAMEN1			SDL_FillRect(screen, NULL, 0x000000); //(pantalla,toda,color) color en "hexadecimal"
+			SDL_FillRect(screen, NULL, 0x000000); //(pantalla,toda,color) color en "hexadecimal"
 			// Para pintar toda la pantalla y quede negra "SDL_FillRect(screen, NULL, 0x000000)";
 			keys = SDL_GetKeyState(NULL);
-			if(keys[SDLK_DOWN])
-			{
+			enemigo->Actualizar();
+			MoverEnemigo();
+			if(keys[SDLK_RIGHT] && !esLimitePantalla(nave,BORDE_DERECHO)) //La nave no esta en el limite de screen
+
+			{//en los metodos se nombran con cosas que se pueden leer
 				nave->Mover(1);				
 			}					
-			nave->Pintar();//4if con todo       EXAMEN1*/
+			nave->Pintar();//4if con todo  
+			enemigo -> Pintar();//Nave enemigo
 
-			/*Otra Imagen   
-			if(keys[SDLK_UP])
+		    //Otra Imagen   
+		/*	if(keys[SDLK_UP])
 			{
-			//nave->PintarModulo(0,0,0,64,64); //esas son coordenas de la imagen que se esta leyendo
+			nave->PintarModulo(0,0,0,64,64); //esas son coordenas de la imagen que se esta leyendo
 			nave->PintarModulo(SPRITE_MODULE_MI_NAVE,100,300);  // 290,175-Pantalla de  "640 X 480" despues de estos se sale.Fig = 65 X 65~
-			}*/
-			 printf("\n2. ESTADO_MENU");//EXAMEN1
-			 if( bandera > 0){ estado = ESTADO_FINALIZADO;}//EXAMEN1
-			 else{estado = ESTADO_JUGANDO;}
+			}
+			 printf("\n2. ESTADO_MENU");*/
+		
 			break;
 		case Estado::ESTADO_JUGANDO:	//JUGAR	
-			 printf("\n3. ESTADO_JUGANDO");//EXAMEN1
+		
 			estado = ESTADO_TERMINADO;
 			break;
 		case Estado::ESTADO_TERMINADO:	//TERMINAR
-			 printf("\n4. ESTADO_TERMINADO");//EXAMEN1	
+	
    		 	 //estado = ESTADO_FINALIZADO;
-			 	 bandera=bandera+1;
-			 	 estado = ESTADO_MENU;//EXAMEN1
+			 
+			
 			
 		  	break;
 		case Estado::ESTADO_FINALIZADO: //SALIR
 			
-		//EXAMEN1	 printf("\n2. ESTADO_MENU");//EXAMEN1
-			 printf("\n5. ESTADO_FINALIZANDO");//EXAMEN1
+		
 
 			getchar();
 			salirJuego = true;
@@ -134,7 +105,55 @@ bool CGame::Start()
 			if(event.type == SDL_QUIT){salirJuego = true;}//Si se detecta una 
 			if(event.type == SDL_KEYDOWN){}
 		}
-//EXAMEN1		SDL_Flip(screen); //imprime en pantalla variable screen
+		SDL_Flip(screen); //imprime en pantalla variable screen
 	}
 	return true;
+}
+
+bool CGame::esLimitePantalla(Nave *objeto, int bandera)//metodo para limitar la pantalla
+{
+	if(bandera & BORDE_IZQUIERDO) //CTRL + ESPACIO// & para valores binarios y 
+	   if (objeto->obtenerX() <= 0)//revisar bordes falso o verdadero
+	      return true;
+	if(bandera & BORDE_SUPERIOR)
+    	if(objeto->obtenerY() <= 0) 
+	     	return true;
+	if(bandera & BORDE_DERECHO)
+    	if(objeto->obtenerX() >= (WIDTH_SCREEN-objeto->obtenerW()))
+	    	return true;
+	if(bandera & BORDE_INFERIOR)
+    	if(objeto->obtenerY() >= (HEIGHT_SCREEN-objeto->obtenerH()))
+	    	return true;
+		return false;// si se cumplen todas las condiciones quiere decir que estamos adentro de la pantalla
+}
+
+void CGame::MoverEnemigo()//Metodo para mover al enemigo
+{
+	// Aqui le damos movimiento x , y
+	//if(!esLimitePantalla(enemigo, BORDE_DERECHO))  // Recordar f(x)=x^2  para garficar  f(x) | x^2
+	//enemigo->Mover(1,50);  // el if y esto es lo que se cambia para moverlo diferente
+	switch(enemigo->ObtenerStepActual())
+	{
+	 case 0:
+		  if(!enemigo->IsRunningAnimacion())
+			  enemigo->Mover(1,WIDTH_SCREEN-enemigo->obtenerW());	
+			 //  enemigo->IncrementarStep();
+			
+		break;
+	 case 1:
+		 enemigo->IncrementarStep();
+		break;
+	 case 2:
+		   if(!enemigo->IsRunningAnimacion())
+		 enemigo->Mover(-1,WIDTH_SCREEN-enemigo->obtenerW());
+		 // enemigo->IncrementarStep();
+		break;
+	 case 3:
+		  enemigo->IncrementarStep();
+		break;
+
+	}
+	
+	//enemigo->ponerEn(ennemigoParabola*ennemigoParabola,ennemigoParabola);
+	//ennemigoParabola+= 0.03f;
 }
