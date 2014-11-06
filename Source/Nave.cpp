@@ -73,13 +73,9 @@ void Nave::Actualizar()
 			   Mover(posicionBrinco);
 			   posicionActual++;
 		   }
-		else
-		 
+		else //Terminar la naimacion		 
 		   {
-			    posicionBrinco=0;
-				posicionActual=0;
-				posicionFinal=0;
-				IncrementarStep();
+			   TerminarAnimacion();
 		   }
 	}
 }
@@ -105,6 +101,13 @@ bool Nave::IsRunningAnimacion()
 		return false;
 	else
 		return true;
+}
+void Nave::TerminarAnimacion()
+{
+	 posicionBrinco=0; //Con estos cuatro renglones terminamos la animacion.
+	 posicionActual=0;
+	 posicionFinal=0;
+	 IncrementarStep();
 }
 
 

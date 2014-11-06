@@ -30,7 +30,9 @@ private:
 
 	SDL_Surface *screen;
 	Nave *nave;      // La nave Nave y enemigo son las naves
-	Nave *enemigo;
+	
+	Nave **enemigoArreglo;//no sabemos cuantos elementos va a tener
+
 	Estado estado;
 
 	float ennemigoParabola;

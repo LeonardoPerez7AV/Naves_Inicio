@@ -29,9 +29,16 @@ void CGame::Iniciando(){
 	SDL_WM_SetCaption( "Mi Primer Juego", NULL);
 	atexit(SDL_Quit); //14-10-2014 12:00 hr
 	nave= new Nave(screen,"../Data/MiNave.bmp",(WIDTH_SCREEN/2)/*-(w/2)*/,(HEIGHT_SCREEN-80)/*-(h)*/);
-	enemigo = new Nave(screen,"../Data/enemigo.bmp",0,0);
+
+//Si se coloca enemigoArreglo 1 con numero cambia la presentacion no lo agarra el for
+	enemigoArreglo = new Nave*[10];   //en este le decimos que son 10 elementos, 10 punteros 
+	for(int i=0;i<10;i++)             //se pone corchete cuando son dos o mas operaciones
+	enemigoArreglo[i]=new Nave(screen,"../Data/enemigo.bmp",i*75,0);//arreglo en posicion cero
+
 	//ennemigoParabola = -100.0f;
-	enemigo->SetStep(4);
+
+	for(int i=0;i<10;i++)  
+		enemigoArreglo[i]->SetStep(4);
 	//nave->CargarImagen("../Data/MiNave.bmp");
 }
 
@@ -61,7 +68,9 @@ bool CGame::Start()
 			SDL_FillRect(screen, NULL, 0x000000); //(pantalla,toda,color) color en "hexadecimal"
 			// Para pintar toda la pantalla y quede negra "SDL_FillRect(screen, NULL, 0x000000)";
 			keys = SDL_GetKeyState(NULL);
-			enemigo->Actualizar();
+	
+			for(int i=0;i<10;i++)
+				enemigoArreglo[i]->Actualizar();
 			MoverEnemigo();
 			if(keys[SDLK_RIGHT] && !esLimitePantalla(nave,BORDE_DERECHO)) //La nave no esta en el limite de screen
 
@@ -69,7 +78,9 @@ bool CGame::Start()
 				nave->Mover(1);				
 			}					
 			nave->Pintar();//4if con todo  
-			enemigo -> Pintar();//Nave enemigo
+	
+			for(int i=0;i<10;i++)
+				enemigoArreglo[i]->Pintar();
 
 		    //Otra Imagen   
 		/*	if(keys[SDLK_UP])
@@ -132,28 +143,34 @@ void CGame::MoverEnemigo()//Metodo para mover al enemigo
 	// Aqui le damos movimiento x , y
 	//if(!esLimitePantalla(enemigo, BORDE_DERECHO))  // Recordar f(x)=x^2  para garficar  f(x) | x^2
 	//enemigo->Mover(1,50);  // el if y esto es lo que se cambia para moverlo diferente
-	switch(enemigo->ObtenerStepActual())
-	{
-	 case 0:
-		  if(!enemigo->IsRunningAnimacion())
-			  enemigo->Mover(1,WIDTH_SCREEN-enemigo->obtenerW());	
-			 //  enemigo->IncrementarStep();
-			
-		break;
-	 case 1:
-		 enemigo->IncrementarStep();
-		break;
-	 case 2:
-		   if(!enemigo->IsRunningAnimacion())
-		 enemigo->Mover(-1,WIDTH_SCREEN-enemigo->obtenerW());
-		 // enemigo->IncrementarStep();
-		break;
-	 case 3:
-		  enemigo->IncrementarStep();
-		break;
-
-	}
+//aqui se borro todo lo del enemigo
 	
 	//enemigo->ponerEn(ennemigoParabola*ennemigoParabola,ennemigoParabola);
 	//ennemigoParabola+= 0.03f;
+	for(int i=0;i<10;i++)
+	switch(enemigoArreglo[i]->ObtenerStepActual())
+	{
+	 case 0:	
+
+		  if(!enemigoArreglo[i]->IsRunningAnimacion())
+			  enemigoArreglo[i]->Mover(1,WIDTH_SCREEN-enemigoArreglo[i]->obtenerW());	
+			 //  enemigo->IncrementarStep();
+		   if(esLimitePantalla(enemigoArreglo[i],BORDE_DERECHO))//Detiene acia el lado derecho
+			 enemigoArreglo[i]->TerminarAnimacion();
+		break;
+	 case 1:
+		 enemigoArreglo[i]->IncrementarStep();
+		break;
+	 case 2:
+		   if(!enemigoArreglo[i]->IsRunningAnimacion())
+			enemigoArreglo[i]->Mover(-1,WIDTH_SCREEN-enemigoArreglo[i]->obtenerW());
+		 // enemigo->IncrementarStep();
+		   if(!enemigoArreglo[i]->IsRunningAnimacion())
+			enemigoArreglo[i]->Mover(-1,WIDTH_SCREEN-enemigoArreglo[i]->obtenerW());
+		break;
+	 case 3:
+		  enemigoArreglo[i]->IncrementarStep();
+		break;
+
+	}
 }
