@@ -13,7 +13,7 @@ class SpriteDef
 	};
      public:
   //   tipo, nombre, espacio[1];
-	    Modulo modulos [1];
+	    Modulo modulos [3];//<--numero de modulos
 	    SpriteDef();//Constructor
 	
 };

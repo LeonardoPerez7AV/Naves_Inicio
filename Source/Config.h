@@ -9,4 +9,7 @@
 #define HEIGHT_SCREEN 480
 #define SPRITE_MODULE_MI_NAVE  0
 
+#define FPS_LIMIT 30.0f
+#define FPS_DELAY 1000.0F / FPS_LIMIT
+
 #endif

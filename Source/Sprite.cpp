@@ -24,7 +24,7 @@ Sprite::~Sprite()
 
 }*/
 
-void Sprite::PintarModulo(int id, int x, int y)
+void Sprite::PintarModulo(int id, int x, int y) //hay que crear un mudulo nuevo e indicar que 
 {
 	SDL_Rect src;
 	src.x = spriteDef.modulos[id].x; //spriteDef.cpp para llamarlo
