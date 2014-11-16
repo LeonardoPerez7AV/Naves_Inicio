@@ -32,18 +32,18 @@ void Nave::MoverDerecha(int posicion)
 	x += posicion;
 }
 //-----
-//void Nave::MoverIzquierda(int posicion)//Nave.h-25;Game.cpp-78;Nave.cpp-86;Nave.cpp-71
-//{  //Se cambio Mover por MoverDerecha. y lo que esta dentro de lo comentado.
-//	x -= posicion;
-//}
-//void Nave::MoverArriba(int posicion)
-//{
-//	y -= posicion;
-//}
-//void Nave::MoverAbajo(int posicion)
-//{
-//	y += posicion;
-//}
+void Nave::MoverIzquierda(int posicion)//Nave.h-25;Game.cpp-78;Nave.cpp-86;Nave.cpp-71
+{  //Se cambio Mover por MoverDerecha. y lo que esta dentro de lo comentado.
+	x -= posicion;
+}
+void Nave::MoverArriba(int posicion)
+{
+	y -= posicion;
+}
+void Nave::MoverAbajo(int posicion)
+{
+	y += posicion;
+}
 //-----
 int Nave::obtenerX()
 {

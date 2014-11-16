@@ -85,39 +85,46 @@ bool CGame::Start()
 			MoverEnemigo();//llama al metodo moverEnemigo.
 			if(keys[SDLK_RIGHT] && !esLimitePantalla(nave,BORDE_DERECHO)) //La nave no esta en el limite de screen 
 			    {//en los metodos se nombran con cosas que se pueden leer
-				nave->MoverDerecha(8);	
+					nave->MoverDerecha(8);	
 			    }
-				//if(keys[SDLK_LEFT] && !esLimitePantalla(nave,BORDE_IZQUIERDO))
-					//if(keys[SDLK_UP] && !esLimitePantalla(nave,BORDE_SUPERIOR))
-					//	if(keys[SDLK_DOWN] && !esLimitePantalla(nave,BORDE_INFERIOR))
+		    if(keys[SDLK_LEFT] && !esLimitePantalla(nave,BORDE_IZQUIERDO))
+				{
+					nave->MoverIzquierda(8);
+			    }
+			 if(keys[SDLK_UP] && !esLimitePantalla(nave,BORDE_SUPERIOR))
+				{
+					nave->MoverArriba(8);
+			    }
+			  if(keys[SDLK_DOWN] && !esLimitePantalla(nave,BORDE_INFERIOR))
+				{
+					nave->MoverAbajo(8);
+			    }
+
 			
+					//if(keys[SDLK_UP] && !esLimitePantalla(nave,BORDE_SUPERIOR))
+					//	if(keys[SDLK_DOWN] && !esLimitePantalla(nave,BORDE_INFERIOR))			
 		     //codigo para la izquierda
 			nave->Pintar();//4if con todo  		
 	
 			for(int i=0;i<10;i++)
 				enemigoArreglo[i]->Pintar();
-
 		    //Otra Imagen   
 		/*	if(keys[SDLK_UP])
 			{
 			nave->PintarModulo(0,0,0,64,64); //esas son coordenas de la imagen que se esta leyendo
 			nave->PintarModulo(SPRITE_MODULE_MI_NAVE,100,300);  // 290,175-Pantalla de  "640 X 480" despues de estos se sale.Fig = 65 X 65~
 			}
-			 printf("\n2. ESTADO_MENU");*/
-		
-		
+			 printf("\n2. ESTADO_MENU");*/			
 			break;
-		case Estado::ESTADO_TERMINADO:	//TERMINAR
-	
-   		 	 //estado = ESTADO_FINALIZADO;
-			 
-			
-			
-		  	break;
-		case Estado::ESTADO_FINALIZADO: //SALIR
-			
-		
 
+
+		case Estado::ESTADO_TERMINADO:	//TERMINAR	
+   		 	 //estado = ESTADO_FINALIZADO;		 			
+		  	break;
+
+
+		case Estado::ESTADO_FINALIZADO: //SALIR		
+		
 			getchar();
 			salirJuego = true;
 			break;
@@ -125,8 +132,9 @@ bool CGame::Start()
 
 		while (SDL_PollEvent(&event))//Aqui el SDL creara una lista de eventos ocurridos
 		{
-			if(event.type == SDL_QUIT){salirJuego = true;}//Si se detecta una 
+			if(event.type == SDL_QUIT){salirJuego = true;}//Si se detecta la [x] se sale. 
 			if(event.type == SDL_KEYDOWN){}
+		
 		}
 		SDL_Flip(screen); //imprime en pantalla variable screen
 

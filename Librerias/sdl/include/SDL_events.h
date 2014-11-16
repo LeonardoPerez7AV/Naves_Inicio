@@ -52,8 +52,8 @@ extern "C" {
 typedef enum {
        SDL_NOEVENT = 0,			/**< Unused (do not remove) */
        SDL_ACTIVEEVENT,			/**< Application loses/gains visibility */
-       SDL_KEYDOWN,			/**< Keys pressed */
-       SDL_KEYUP,			/**< Keys released */
+       SDL_KEYDOWN,			    /**< Keys pressed */
+       SDL_KEYUP,			    /**< Keys released */
        SDL_MOUSEMOTION,			/**< Mouse moved */
        SDL_MOUSEBUTTONDOWN,		/**< Mouse button pressed */
        SDL_MOUSEBUTTONUP,		/**< Mouse button released */
