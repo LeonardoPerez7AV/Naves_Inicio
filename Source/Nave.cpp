@@ -1,7 +1,8 @@
 #include "Nave.h"
 #include "Config.h"
 
-Nave:: Nave(SDL_Surface * screen, char *rutaImagen, int x, int y, int module)//constructor y aqui recibe los parametros
+//constructor y aqui recibe los parametros
+Nave:: Nave(SDL_Surface * screen, char *rutaImagen, int x, int y, int module)
 {
 	moduleUsing = module;
 	sprite = new Sprite(screen);
@@ -32,7 +33,7 @@ void Nave::MoverDerecha(int posicion)
 }
 //-----
 //void Nave::MoverIzquierda(int posicion)//Nave.h-25;Game.cpp-78;Nave.cpp-86;Nave.cpp-71
-//{                                      //Se cambio Mover por MoverDerecha. y lo que esta dentro de lo comentado.
+//{  //Se cambio Mover por MoverDerecha. y lo que esta dentro de lo comentado.
 //	x -= posicion;
 //}
 //void Nave::MoverArriba(int posicion)

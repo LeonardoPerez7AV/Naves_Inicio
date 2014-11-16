@@ -1,7 +1,9 @@
 #include "Sprite.h"
 
-void Sprite::CargarImagen(char*ruta){
+void Sprite::CargarImagen(char*ruta){//Aqui es donde cargamos las imagenes de acuerdo a la ruta que pusimos
 		image= SDL_LoadBMP(ruta);
+		SDL_SetColorKey(image,SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(image->format,255,0,0));//hoy15-11-2014
+		//Con este SDL_SetColorKey le estamos haciendo transparentes el color rojo de las naves
 }
 
 Sprite::Sprite(SDL_Surface * screen)

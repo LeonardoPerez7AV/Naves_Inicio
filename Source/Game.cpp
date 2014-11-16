@@ -38,10 +38,12 @@ void CGame::Iniciando(){
 	for(int i=0;i<10;i++)             //se pone corchete cuando son dos o mas operaciones
 	enemigoArreglo[i]=new Nave(screen,"../Data/enemigo.bmp",i*75,0,2);//arreglo en posicion cero
 
+
 	//ennemigoParabola = -100.0f;
 
 	for(int i=0;i<10;i++)  
 		enemigoArreglo[i]->SetStep(4);
+
 	//nave->CargarImagen("../Data/MiNave.bmp");
 }
 
@@ -69,14 +71,15 @@ bool CGame::Start()
 			break;
 		case Estado::ESTADO_MENU:	//MENU
 			menu->Pintar();
+			//system("PAUSE()"); //hoy
 		   // primer imagen es el fondodel menu
-		    //estado = ESTADO_TERMINADO; esta es tarea
+				keys = SDL_GetKeyState(NULL);//hoy
+			if(keys[SDLK_KP_ENTER]){estado = ESTADO_JUGANDO;}// esta es tarea//hoy
 			break;
 		case Estado::ESTADO_JUGANDO:	//JUGAR	
 				SDL_FillRect(screen, NULL, 0x000000); //(pantalla,toda,color) color en "hexadecimal"
 			// Para pintar toda la pantalla y quede negra "SDL_FillRect(screen, NULL, 0x000000)";
-			keys = SDL_GetKeyState(NULL);
-	
+			keys = SDL_GetKeyState(NULL);	
 			for(int i=0;i<10;i++)
 				enemigoArreglo[i]->Actualizar();
 			MoverEnemigo();//llama al metodo moverEnemigo.
@@ -84,7 +87,7 @@ bool CGame::Start()
 			    {//en los metodos se nombran con cosas que se pueden leer
 				nave->MoverDerecha(8);	
 			    }
-				if(keys[SDLK_LEFT] && !esLimitePantalla(nave,BORDE_IZQUIERDO))
+				//if(keys[SDLK_LEFT] && !esLimitePantalla(nave,BORDE_IZQUIERDO))
 					//if(keys[SDLK_UP] && !esLimitePantalla(nave,BORDE_SUPERIOR))
 					//	if(keys[SDLK_DOWN] && !esLimitePantalla(nave,BORDE_INFERIOR))
 			

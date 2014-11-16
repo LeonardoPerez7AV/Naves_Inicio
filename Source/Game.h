@@ -29,7 +29,7 @@ private:
 	SDL_Event event;//La variable event de tipo evento de SDL nos sirve para
 
 	SDL_Surface *screen;
-	Nave *nave;      // La nave Nave y enemigo son las naves	
+	Nave *nave;      // La nave "Nave" y enemigo son las naves	
 	Nave **enemigoArreglo;//no sabemos cuantos elementos va a tener
 	Nave *menu;//este es el objeto es nos permite pintar o dibujar ene la pantalla
     Nave *texto;

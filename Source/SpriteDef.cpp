@@ -17,6 +17,6 @@ SpriteDef::SpriteDef()//constructor de la clase
 	modulos[2].id = 2;//MODULO 1 ES DE LA PORTADA
 	modulos[2].x = 0;
 	modulos[2].y = 0;
-	modulos[2].w = 54;//Ancho nave de enemigo 
-	modulos[2].h = 61;//largo de enemigo
+	modulos[2].w = 64;//Ancho nave de enemigo //hoy
+	modulos[2].h = 64;//largo de enemigo//hoy
 }  //en metodos no lleva ;
