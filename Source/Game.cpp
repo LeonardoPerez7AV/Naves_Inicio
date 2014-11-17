@@ -32,6 +32,10 @@ void CGame::Iniciando(){
 	atexit(SDL_Quit); //14-10-2014 12:00 hr
 	nave= new Nave(screen,"../Data/MiNave.bmp",(WIDTH_SCREEN/2)/*-(w/2)*/,(HEIGHT_SCREEN-80)/*-(h)*/,0);
 	menu=new Nave(screen,"../Data/FondoMenu.bmp",0,0,1);
+	fondo=new Nave(screen,"../Data/FondoJuego.bmp",0,0,1);//fondo y texto 16-11-2014
+    texto=new Nave(screen,"../Data/Texto.bmp",0,0,1);
+	
+
 
 //Si se coloca enemigoArreglo 1 con numero cambia la presentacion no lo agarra el for
 	enemigoArreglo = new Nave*[10];   //en este le decimos que son 10 elementos, 10 punteros 
@@ -71,6 +75,7 @@ bool CGame::Start()
 			break;
 		case Estado::ESTADO_MENU:	//MENU
 			menu->Pintar();
+			texto->Pintar();	
 			//system("PAUSE()"); //hoy
 		   // primer imagen es el fondodel menu
 				keys = SDL_GetKeyState(NULL);//hoy
@@ -79,7 +84,8 @@ bool CGame::Start()
 		case Estado::ESTADO_JUGANDO:	//JUGAR	
 				SDL_FillRect(screen, NULL, 0x000000); //(pantalla,toda,color) color en "hexadecimal"
 			// Para pintar toda la pantalla y quede negra "SDL_FillRect(screen, NULL, 0x000000)";
-			keys = SDL_GetKeyState(NULL);	
+			keys = SDL_GetKeyState(NULL);				
+			fondo->Pintar();//16-11-2014----------------------------------------------------------------------------
 			for(int i=0;i<10;i++)
 				enemigoArreglo[i]->Actualizar();
 			MoverEnemigo();//llama al metodo moverEnemigo.

@@ -31,9 +31,9 @@ private:
 	SDL_Surface *screen;
 	Nave *nave;      // La nave "Nave" y enemigo son las naves	
 	Nave **enemigoArreglo;//no sabemos cuantos elementos va a tener
-	Nave *menu;//este es el objeto es nos permite pintar o dibujar ene la pantalla
+	Nave *fondo;//este es el objeto es nos permite pintar o dibujar ene la pantalla
     Nave *texto;
-	Nave *fondo;
+	Nave *menu;
 
 	Estado estado;
 

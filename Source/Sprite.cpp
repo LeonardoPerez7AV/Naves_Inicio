@@ -37,6 +37,7 @@ void Sprite::PintarModulo(int id, int x, int y) //hay que crear un mudulo nuevo 
 	dest.x = x;
 	dest.y = y;
 	SDL_BlitSurface(image, &src, screen, &dest);
+
 }
 
 int Sprite::WidthModule(int id)
